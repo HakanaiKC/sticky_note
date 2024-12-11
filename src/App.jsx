@@ -17,13 +17,12 @@ function App() {
     },
   ]);
 
+  const [getNoteContent, setGetNoteContent] = useState();
   const [open, setOpen] = useState(false);
 
-  const handleOpenNote = (id) => {
-    setOpen((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+  const handleOpenNote = (item) => {
+    setGetNoteContent(item);
+    setOpen(true);
   };
 
   const handleAddNewNotes = () => {
@@ -54,7 +53,7 @@ function App() {
           <div
             className="m-3"
             key={item.id}
-            onDoubleClick={() => handleOpenNote(item.id)}
+            onDoubleClick={() => handleOpenNote(item)}
           >
             <div className="bg-[#FFF7D1] w-full h-[200px] p-3">
               <div className="flex justify-end">
@@ -63,7 +62,7 @@ function App() {
                     items: [
                       {
                         label: (
-                          <button onClick={() => handleOpenNote(item.id)}>
+                          <button onClick={() => handleOpenNote(item)}>
                             Open Note
                           </button>
                         ),
@@ -88,10 +87,10 @@ function App() {
             </div>
             <PopUpNote
               setOpen={setOpen}
-              open={open[item.id]}
-              content={item.content}
+              open={open}
               setListNotes={setListNotes}
               listNotes={listNotes}
+              getNoteContent={getNoteContent}
               id={item.id}
               // setIsBold={setIsBold}
               // setIsItalic={setIsItalic}

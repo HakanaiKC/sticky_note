@@ -7,8 +7,7 @@ const PopUpNote = ({
   setOpen,
   setListNotes,
   listNotes,
-  content,
-  id,
+  getNoteContent,
   // setIsItalic,
   // setIsBold,
   // isBold,
@@ -19,7 +18,9 @@ const PopUpNote = ({
   const handleInputNote = (e) => {
     // eslint-disable-next-line react/prop-types
     const rs = listNotes.map((item) =>
-      item.id === id ? { ...item, content: e.target.value } : item
+      item.id === getNoteContent.id
+        ? { ...item, content: e.target.value }
+        : item
     );
     setListNotes(rs);
   };
@@ -31,8 +32,6 @@ const PopUpNote = ({
   const handleChangeItalic = () => {
     setIsItalic(!isItalic);
   };
-
-  console.log(open);
 
   return (
     <>
@@ -54,7 +53,7 @@ const PopUpNote = ({
             } ${isItalic && "italic"}`}
             placeholder="Take a note..."
             onChange={(e) => handleInputNote(e)}
-            defaultValue={content}
+            defaultValue={getNoteContent.content}
           />
 
           <div className="flex justify-start p-2 bg-[#FFF7D1] border-t border-gray-300">
